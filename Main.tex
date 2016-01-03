@@ -184,22 +184,27 @@ The following three models are used to described the relationships amongst these
 \begin{frame}{Common Classes}
     For the simulation, the following common classes are designed:
 
-    class \code{Node}, \pause 
-    class \code{Evidence}, \pause 
-    class \code{BayesianNetwork}, \pause 
-    class \code{Product}, \pause 
-    class \code{Process}, \pause 
-    class \code{ProductionModel}, \pause 
-    class \code{SystemState}, \pause 
-    class \code{RiskModel}, \pause 
-    class \code{Strategies.Security}, \pause 
-    class \code{Strategies.Recover}, and \pause 
+    class \code{Node}, \pause
+    class \code{Evidence}, \pause
+    class \code{BayesianNetwork}, \pause
+    class \code{Product}, \pause
+    class \code{Process}, \pause
+    class \code{ProductionModel}, \pause
+    class \code{SystemState}, \pause
+    class \code{RiskModel}, \pause
+    class \code{Strategies.Security}, \pause
+    class \code{Strategies.Recover}, and \pause
     class \code{DecisionMaker}.
 
     \pause
     The relationship amongst these classes are shown as follows.
 
     \resizebox{\textwidth}{!}{\input{Figures/Common.Classes.tex}}
+\end{frame}
+
+\begin{frame}{Common Classes}
+  \centering
+  \includegraphics[height = \textheight]{Figures/Line.Count.png}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -211,7 +216,7 @@ The following example is used to introduce how to use the class \code{Node} and 
     \begin{flushleft}
     The Bayesian network is shown as follows.
     \end{flushleft}
-    
+
     \centering
     \input{Figures/Bayesian.Network.Example.tex}
 \end{minipage}\hspace{10pt}\pause
@@ -336,13 +341,13 @@ P(+Brain Tumor|+Pos Xray) = 0.089335
 
 \begin{frame}{The Analysis of the Chemical Reactor Control System}
     In this chemical reactor control system, there are 2 semi-product and 2 product which is shown as follows.
-    
+
     \scriptsize
     \tabulinesep =1.5mm
     \begin{tabu}{X[-1, c, m]X[-1, m]X[-1, m]}
     \tabucline[1pt]{-} Symbol      & Type           & Description\\
     \tabucline[1pt]{-}
-    \code{s01}  & semi-product   & the semi-product which is the output from the top of the distillation column\\\hline 
+    \code{s01}  & semi-product   & the semi-product which is the output from the top of the distillation column\\\hline
     \code{s02}  & semi-product   & the semi-product which is the other outputs from the bottom of the distillation column\\\hline
     \code{s03}  & product        & the product which is the output from the reactor 1\\\hline
     \code{s04}  & product        & the product which is the output from the reactor 2\\
@@ -634,7 +639,7 @@ P(+Brain Tumor|+Pos Xray) = 0.089335
     \tabucline[1pt]{-}
     Symbol & Description          & Rocovered Functions                 & Cost(\$) \\
     \tabucline[1pt]{-}
-    \only<1>{ 
+    \only<1>{
     \code{n01}  & reboot PLC1     & \code{f03}                          &  9,000   \\\hline
     \code{n02}  & reboot PLC2     & \code{f06}                          &  9,000   \\\hline
     \code{n03}  & reboot PLC3     & \code{f07}, \code{f08}              & 10,000   \\\hline
@@ -645,7 +650,7 @@ P(+Brain Tumor|+Pos Xray) = 0.089335
     \code{n08}  & reboot PLC8     & \code{f14}, \code{f15}              & 13,000   \\
     \tabucline[1pt]{-}
     }
-    \only<2>{ 
+    \only<2>{
     \code{n09}  & reboot PLC9     & \code{f23}                          & 14,000   \\\hline
     \code{n10}  & reboot PLC10    & \code{f26}, \code{f30}              &  7,500   \\\hline
     \code{n11}  & reboot PLC11    & \code{f27}, \code{f28}, \code{f29}  & 14,000   \\\hline
@@ -656,8 +661,8 @@ P(+Brain Tumor|+Pos Xray) = 0.089335
     \end{overlayarea}
 \end{frame}
 
-\section{Task Planning}                                                              
-\begin{frame}{Task Planning}                                                         
+\section{Task Planning}
+\begin{frame}{Task Planning}
     \begin{itemize}
       \item Finish the simulation of 2\textsuperscript{nd} paper.
       \item Finish the 3\textsuperscript{rd} paper for the special issue on Fuzzy Systems.
