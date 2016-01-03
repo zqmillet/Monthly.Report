@@ -44,11 +44,16 @@
 \ExplSyntaxOff
 
 \usepackage{soul}
+\usepackage{keycommand}
 
 \DeclareMathSizes{5}{5}{3}{3}
 
 \newcommand{\pgfdefaultlinewidth}{0.75pt}
 \newcommand{\risk}{\mathscr{R}}
+
+\newkeycommand{\shadowtag}[align = center, background = white, x = 0, y = 0, color = black][1]{%
+	\node at (\commandkey{x}, \commandkey{y}) [text shadow={[align=\commandkey{align}] at (\commandkey{x}, \commandkey{y}) {#1}}, align = \commandkey{align}] {\textcolor{\commandkey{color}}{#1}};
+}
 
 
 \begin{document}
@@ -83,54 +88,78 @@
 \end{frame}
 
 % Main Body
-\section{Impressions}
-% 我们的研究方向是没问题的，现在国内外很多人都在研究这方面内容，周老师从五六年前就开始关注这个方向我打心眼里说周老师还是非常有远见的。
-\begin{frame}{We are in the Right Direction.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/Heathrow.jpg}
+\section{Seven Factors about the Risk}
+\begin{frame}{What are the seven factors?}
+    \begin{itemize}[<+->]
+      \item \textbf{Attack Strategy} refers to the atom attack which is launched by an attacker to achieve his destructive purpose.
+      \item \textbf{System Function} refers to the function of control system.
+      \item \textbf{Security Strategy} is a kind of defense strategy which can prevent attack strategy.
+      \item \textbf{Recover Strategy} is a kind of defense strategy which can recover the failed system function.
+      \item \textbf{Hazardous Incident} refers to the unexpected incident which will cause monetary loss of ICSs.
+      \item \textbf{Production Process} refers a manufacturing step which is a part of in a production chain.
+      \item \textbf{Monetary Loss} is the sum of the loss caused by malicious attacks, the loss of production process shutdown, and the enforcement cost of defense strategy.
+    \end{itemize}
 \end{frame}
 
-% 我们的研究进展是处于领先水平的，开会的时候我们发现同行很少做的有我们这么深入的。
-\begin{frame}{We are Occupying a Leading Position.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/Bristol.jpg}
+\begin{frame}{Seven Factors about the Risk of ICSs}
+\scalebox{0.6}{
+\begin{tikzpicture}[line width = 1pt,
+                    factor/.style = {circle, fill = black!70, text = white, font = \bf, inner sep = 0pt, align = center, minimum size = 2cm},
+                    tag/.style = {align = center, inner sep = 1pt},
+                    model/.style = {rounded corners, opacity= 0.3},
+                    arrow/.style = {->, rounded corners}]
+
+\small
+\fill[gray, model] (-0.5, 0.5) -- (-0.5, 3.5) -- (2.5, 3.5) -- (2.5, 12.5) -- (5.5,12.5) -- (5.5, 0.5) -- cycle;
+\fill[blue, model] (-0.4, 12.4) -- (5.4, 12.4) -- (5.4, 9.5) -- (2.4, 9.5) -- (2.4, 6.5) -- (5.4, 6.5) -- (5.4, 3.6) -- (-0.4, 3.6) -- cycle;
+\fill[red, model] (5.6,3.4) -- (5.6, 12.4) -- (8.4,12.4) -- (8.4, 0.6) -- (2.6, 0.6) -- (2.6, 3.4) -- cycle;
+
+
+\shadowtag[x = 1, y = 2.2]{\bf Multi-level}
+\shadowtag[x = 1, y = 1.8]{\bf Bayesian Network}
+\shadowtag[x = 1, y = 4.2, color = blue]{\bf Process Model}
+\shadowtag[x = 7, y = 4.4, color = red]{\bf Attack-Defense}
+\shadowtag[x = 7, y = 4.0, color = red]{\bf Strategies Models}
+
+
+\node[tag] (AS2SF) at (4, 3.5) {Invalidate};
+\node[tag] (SF2HI) at (4, 6.5) {Failure Cause};
+\node[tag] (SF2PP) at (1, 6.5) {Failure Invalidate};
+\node[tag] (RS2SF) at (7, 6.5) {Validate};
+
+\node[tag] (PP2ML) at (1, 9.5) {Shutdown Cause};
+\node[tag] (HI2ML) at (4, 9.5) {Cause};
+\node[tag] (RS2ML) at (7, 9.5) {Cause};
+
+\node[factor] (ML) at (4, 11) {Monetary\\Loss};
+\node[factor] (HI) at (4,  8) {Hazardous\\Incident};
+\node[factor] (SF) at (4,  5) {System\\Function};
+\node[factor] (AS) at (4,  2) {Attack\\Strategy};
+\node[factor] (PP) at (1,  8) {Production\\Process};
+\node[factor] (RS) at (7,  8) {Recover\\Strategy};
+\node[factor] (SS) at (7,  2) {Security\\Strategy};
+
+\draw[arrow] (AS) -- (AS2SF) -- (SF);
+\draw[arrow] (SF) -- (SF2HI) -- (HI);
+\draw[arrow] (HI) -- (HI2ML) -- (ML);
+\draw[arrow] (SF) -| (SF2PP) -- (PP);
+\draw[arrow] (PP) -- (PP2ML) |- (ML);
+
+\draw[arrow] (RS) -- (RS2ML) |- (ML);
+\draw[arrow] (RS) -- (RS2SF) |- (SF);
+
+\draw[arrow] (SS) -- (SF) node[midway, sloped, above] {Invalidate};
+\draw[arrow] (SS) -- (AS) node[midway, sloped, above] {Prevent};
+\end{tikzpicture}}
 \end{frame}
 
-% 交流非常重要，这里的交流指两点，往大了说，是指不同学校、国家之间的学术交流。Scube、Bayes网的仿真工具。往小了说，是指实验室同学之间的交流。
-\begin{frame}{Communication is Important.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/Oxford.jpg}
-\end{frame}
 
-% 实验平台很重要，而且要与实际应用紧密耦合，不能建造空中楼阁。杨老师这方面做的很好，项目都有很强的应用背景，有的甚至有产品，抛开技术含量的问题，这些实物给人的感受远远比一堆论文要来的震撼。
-\begin{frame}{Testbed is Important.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/Leeds.jpg}
-\end{frame}
-
-% 英语很重要。一方面是书面表达，写文章的时候很有用，而且不能临阵磨枪，我建议有读博打算的同学趁早学好英语，不要像我，文章因为语言问题耽误很久。另一方面就是听说能力，我前面说过，学术交流是十分重要的，很多学术会议都是英文的，所以英语的口语和听力是十分重要的。周老师基本每年都会带学生出国，我相信，周老师喜欢带英语好的人出国，所以想抓住这个公费出国机会的同学，需要提高英语听说能力。
-\begin{frame}{English is Important.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/BigBen.jpg}
-\end{frame}
-
-% 我们需要更加自信。开会转了一圈，跟别人交流了很多，同方向的坐到我们这个深度的非常少。
-\begin{frame}{We should be More Confident.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/TowerBridge.jpg}
-\end{frame}
-
-% 我们需要更努力的工作。前面我说了，我们的方向没问题，而且处于领先位置，但是现在领先不意味着一直领先。现在国内外做信息安全的人非常非常多，竞争非常激烈，如果我们不及时把我们的研究成果变成论文、专利，那么等别人先发出来就没我们什么事儿了。所以说我们需要更加努力的搞科研。
-\begin{frame}{We should Work Harder and Harder.}
-    \centering
-    \includegraphics[width=\textwidth, height = 0.9\textheight]{Figures/Buckingham.jpg}
-\end{frame}
 
 \section{Task Planning}
 \begin{frame}{Task Planning}
     \begin{itemize}
-      \item Revise the 1\textsuperscript{st} Paper.
-      \item Finish the 2\textsuperscript{nd} Paper.
+      \item Finish the simulation of 2\textsuperscript{nd} paper.
+      \item Finish the 3\textsuperscript{rd} paper for the special issue on Fuzzy Systems.
     \end{itemize}
 \end{frame}
 
