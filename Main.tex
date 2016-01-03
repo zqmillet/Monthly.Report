@@ -55,6 +55,10 @@
 	\node at (\commandkey{x}, \commandkey{y}) [text shadow={[align=\commandkey{align}] at (\commandkey{x}, \commandkey{y}) {#1}}, align = \commandkey{align}] {\textcolor{\commandkey{color}}{#1}};
 }
 
+\newcommand{\code}[1]{
+    \texttt{\textcolor[rgb]{0.00,0.00,1.00}{#1}}
+}
+
 
 \begin{document}
 
@@ -88,8 +92,8 @@
 \end{frame}
 
 % Main Body
-\section{Seven Factors about the Risk}
-\begin{frame}{What are the seven factors?}
+\section{Multiple Models for Risk Assessment}
+\begin{frame}{Seven Factors about the Risk}
 \vspace{10pt}\hspace{-30pt}
 \begin{minipage}{1.12\textwidth}
     \begin{itemize}[<+->]
@@ -107,12 +111,12 @@
 \begin{frame}{The relationships amongst these seven factors}
 \vspace{10pt}\hspace{-35pt}
 \begin{minipage}{0.6\textwidth}
-\begin{itemize}
+\begin{itemize}[<+->]
   \item The attack strategy can invalidate the system function. 
   \item The failure of the system function can lead to hazardous incident and product process shutdown.
   \item The occurrence of these two unexpected events will both cause the monetary loss of ICSs.
   \item The security strategy will prevent the enforcement of attack strategy, but its side effect is that it may invalidate the system function.
-  \item The recover strategy has ability of recover the failed system function, and it has the enforcement cost.
+  \item The recover strategy has ability of recovering the failed system function, and it has the enforcement cost.
 \end{itemize}
 \end{minipage}
 \hspace{5pt}
@@ -169,9 +173,46 @@
 \end{tikzpicture}
 }
 \end{minipage}
+\end{frame}
 
+\begin{frame}{Multiple Models of Risk Assessment for ICSs}
+The following three models are used to described the relationships amongst these seven factors.
+
+\begin{itemize}[<+->]
+  \item The \textbf{multi-level Bayesian network}, involves attack strategy, system function, hazardous incident, and monetary loss. This model uses Bayesian network to describe the causal relationship of these four factors and it can be used to assess the risk caused by the malicious attacks.
+  \item The \textbf{process model} involves system functions, production process, and monetary loss. It can be used to calculate the risk cause by the degradation of control system.
+  \item The \textbf{attack-defense strategies models}, include attack strategy model, security strategy model, and recover strategy model. These three models contain the relationships amongst these three kinds of strategies and system functions, and they can be used to quantify the cost and benefit of attack-defense strategies.
+\end{itemize}
+\end{frame}
+
+\section{Simulation}
+\subsection{A Failed Attempt}
+\begin{frame}{A Failed Attempt --- C++ Version}
+    I had implemented the class \code{Node} and the class \code{BayesianNetwork} with C++ language.
+    
+    The inference of Bayesian network is provided by \code{dlib}, which is a C++ library. But the computation time of the Bayesian network inference is 30 times slower than that of the implementation by Matlab.\vspace{5pt}
+    
+    \begin{center}
+    \tabulinesep =1.5mm
+    \begin{tabu}to 0.8\textwidth{X[l]X[r]}
+        \tabucline[1pt]{-}
+        Runtime Environment  & Computation Time(ms)\\
+        \hline
+        C++ in Debug Mode    & 40,000\\
+        C++ in Release Mode  & 3,600\\
+        Matlab               & 90\\
+        \tabucline[1pt]{-}
+    \end{tabu}\vspace{5pt}
+    \end{center}
+    
+    The Matlab has optimized the algorithm for a large amount of computation.
+\end{frame}
+
+\subsection{Common Classes for Risk Assessment}
+\begin{frame}{Common Classes for Risk Assessment}
 
 \end{frame}
+
 
 
 
