@@ -90,6 +90,8 @@
 % Main Body
 \section{Seven Factors about the Risk}
 \begin{frame}{What are the seven factors?}
+\vspace{10pt}\hspace{-30pt}
+\begin{minipage}{1.12\textwidth}
     \begin{itemize}[<+->]
       \item \textbf{Attack Strategy} refers to the atom attack which is launched by an attacker to achieve his destructive purpose.
       \item \textbf{System Function} refers to the function of control system.
@@ -99,11 +101,25 @@
       \item \textbf{Production Process} refers a manufacturing step which is a part of in a production chain.
       \item \textbf{Monetary Loss} is the sum of the loss caused by malicious attacks, the loss of production process shutdown, and the enforcement cost of defense strategy.
     \end{itemize}
+\end{minipage}
 \end{frame}
 
-\begin{frame}{Seven Factors about the Risk of ICSs}
-\scalebox{0.6}{
-\begin{tikzpicture}[line width = 1pt,
+\begin{frame}{The relationships amongst these seven factors}
+\vspace{10pt}\hspace{-35pt}
+\begin{minipage}{0.6\textwidth}
+\begin{itemize}
+  \item The attack strategy can invalidate the system function. 
+  \item The failure of the system function can lead to hazardous incident and product process shutdown.
+  \item The occurrence of these two unexpected events will both cause the monetary loss of ICSs.
+  \item The security strategy will prevent the enforcement of attack strategy, but its side effect is that it may invalidate the system function.
+  \item The recover strategy has ability of recover the failed system function, and it has the enforcement cost.
+\end{itemize}
+\end{minipage}
+\hspace{5pt}
+\begin{minipage}{0.38\textwidth}
+\scalebox{0.63}{
+\begin{tikzpicture}
+                   [line width = 1pt,
                     factor/.style = {circle, fill = black!70, text = white, font = \bf, inner sep = 0pt, align = center, minimum size = 2cm},
                     tag/.style = {align = center, inner sep = 1pt},
                     model/.style = {rounded corners, opacity= 0.3},
@@ -150,7 +166,11 @@
 
 \draw[arrow] (SS) -- (SF) node[midway, sloped, above] {Invalidate};
 \draw[arrow] (SS) -- (AS) node[midway, sloped, above] {Prevent};
-\end{tikzpicture}}
+\end{tikzpicture}
+}
+\end{minipage}
+
+
 \end{frame}
 
 
