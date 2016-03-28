@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+    \linespread{1}
+    \begin{axis}[
+        width            = 1.1\textwidth,
+        height           = 4cm,
+        xtick            = {0,        1,   2,        3, 4},
+        xticklabels      = {0, $\pl{p}$, $p$, $\pu{p}$, 1},
+        xticklabel style = {text height = 1.5ex},
+        ytick            = {0, 1},
+        yticklabels      = {0, 1}]
+
+        \addplot[
+            line width   = 1pt,
+            mark         = none,
+            draw         = blue]
+            coordinates {
+                (0,0)
+                (1,0)
+                (2,1)
+                (3,0)
+                (4,0)
+            };
+    \end{axis}
+\end{tikzpicture} 

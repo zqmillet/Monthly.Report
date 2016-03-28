@@ -1,0 +1,171 @@
+\usepackage{Theme/BeamerTheme}
+\usefonttheme[onlymath]{serif}
+\usepackage{hyperref}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{commath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\justifying
+\let\raggedright\justifying
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usetikzlibrary{shadows}
+\usetikzlibrary{positioning}
+\usetikzlibrary{circuits.ee.IEC}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{shapes}
+\usetkzobj{all}
+\usepackage[framed,numbered]{matlab-prettifier}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{fillbetween}
+
+\usepackage{tabu}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{ifthen}
+\usepackage{siunitx}
+\ExplSyntaxOn
+\cs_new_eq:NN \siunitx_table_collect_begin:Nn \__siunitx_table_collect_begin:Nn
+\ExplSyntaxOff
+
+\usepackage{soul}
+\usepackage{keycommand}
+
+\DeclareMathSizes{5}{5}{3}{3}
+
+\newcommand{\pgfdefaultlinewidth}{0.75pt}
+
+\makeatletter
+\lstnewenvironment{bash}[1][]{%
+  \lstset{%
+    #1,
+    style = Matlab-editor,
+    numbers=left,
+    numberstyle = \scriptsize,
+    basicstyle = \ttfamily\footnotesize,
+    firstnumber=auto,
+  }%
+  \csname\@lst @SetFirstNumber\endcsname
+}{%
+  \csname \@lst @SaveFirstNumber\endcsname
+}
+\makeatother
+
+% The following codes are used to draw help lines for tikzpicture.
+\makeatletter
+\def\grd@save@target#1{%
+  \def\grd@target{#1}}
+\def\grd@save@start#1{%
+  \def\grd@start{#1}}
+\tikzset{
+  grid with coordinates/.style={
+    to path={%
+      \pgfextra{%
+        \edef\grd@@target{(\tikztotarget)}%
+        \tikz@scan@one@point\grd@save@target\grd@@target\relax
+        \edef\grd@@start{(\tikztostart)}%
+        \tikz@scan@one@point\grd@save@start\grd@@start\relax
+        \draw[minor help lines] (\tikztostart) grid (\tikztotarget);
+        \draw[major help lines] (\tikztostart) grid (\tikztotarget);
+        \grd@start
+        \pgfmathsetmacro{\grd@xa}{\the\pgf@x/1cm}
+        \pgfmathsetmacro{\grd@ya}{\the\pgf@y/1cm}
+        \grd@target
+        \pgfmathsetmacro{\grd@xb}{\the\pgf@x/1cm}
+        \pgfmathsetmacro{\grd@yb}{\the\pgf@y/1cm}
+        \pgfmathsetmacro{\grd@xc}{\grd@xa + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+        \pgfmathsetmacro{\grd@yc}{\grd@ya + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+        \foreach \x in {\grd@xa,\grd@xc,...,\grd@xb}
+        \node[anchor=north] at (\x,\grd@ya) {\pgfmathprintnumber{\x}};
+        \foreach \y in {\grd@ya,\grd@yc,...,\grd@yb}
+        \node[anchor=east] at (\grd@xa,\y) {\pgfmathprintnumber{\y}};
+      }
+    }
+  },
+  minor help lines/.style={
+    help lines,
+    step=\pgfkeysvalueof{/tikz/grid with coordinates/minor step}
+  },
+  major help lines/.style={
+    help lines,
+    line width=\pgfkeysvalueof{/tikz/grid with coordinates/major line width},
+    step=\pgfkeysvalueof{/tikz/grid with coordinates/major step}
+  },
+  grid with coordinates/.cd,
+  minor step/.initial=.2,
+  major step/.initial=1,
+  major line width/.initial=2pt,
+}
+\makeatother
+
+
+\tikzset{circuit declare symbol = ac source}
+% \tikzset{font = \fontsize{10pt}{12pt}\selectfont}
+\tikzset{set ac source graphic = ac source IEC graphic}
+\tikzset
+{
+    ac source IEC graphic/.style=
+    {
+        transform shape,
+        circuit symbol lines,
+        circuit symbol size = width 3 height 3,
+        shape=generic circle IEC,
+        /pgf/generic circle IEC/before background=
+        {
+            \pgfpathmoveto{\pgfpoint{-0.8pt}{0pt}}
+            \pgfpathsine{\pgfpoint{0.4pt}{0.4pt}}
+            \pgfpathcosine{\pgfpoint{0.4pt}{-0.4pt}}
+            \pgfpathsine{\pgfpoint{0.4pt}{-0.4pt}}
+            \pgfpathcosine{\pgfpoint{0.4pt}{0.4pt}}
+            \pgfusepathqstroke
+        }
+    }
+}
+
+\def\shadowtext[#1]#2at#3(#4)#5{
+    \foreach \angle in {0,5,...,359}{
+    	\node[#1, text=white] at ([shift={(\angle:.8pt)}] #4){#5};
+    }
+    \node[#1] at (#4){#5};
+}
+
+
+\newtheorem{prop}{Proposition}
+
+% The follow codes are macros for frequent terms.
+\newcommand{\etal}{\emph{et al}.}
+\newcommand{\risk}{\mathscr{R}}
+\newcommand{\pu}[1]{\overline{#1}{}} % probability upper
+\newcommand{\pl}[1]{\underline{#1}{}} % probability lower
+\newcommand{\fp}[1]{\widetilde{#1}{}} % fuzzy probability
+\newkeycommand{\fpe}[symbol = p][1]{ % fuzzy probability expansion
+    (\pl{\commandkey{symbol}}_{#1}, \commandkey{symbol}_{#1}, \pu{\commandkey{symbol}}_{#1})
+}
+\newcommand{\acuts}{$\alpha$-cuts{}}
+\newcommand{\acut}[1]{{}^{\alpha}\hspace{-1.8pt}{#1}}
+\newcommand{\abfbai}{\acuts{} based fuzzy Bayesian approximate inference}
+\newcommand{\Abfbai}{\acuts{} Based Fuzzy Bayesian Approximate Inference}
+\newcommand{\lthreshold}{D_{\min}}
+\newcommand{\bnt}{\mathscr{B}}
+\newcommand{\cmodel}{\mathscr{C}}
+\newcommand{\pnode}[1]{{}^{*}\hspace{-1.4pt}{#1}}
+\newcommand{\cnode}[1]{{#1}^*}
+\newcommand{\var}{\hspace{1pt}\cdot\hspace{1pt}}
+
+\newcommand{\LambdaX}[1]{
+    \displaystyle\sum_{x}{\lambda_{x}{(x)}} \prod_{j}{\lambda_{\cnode{x}_j}^{(t)}{(x)}} \sum_{\pnode{\bm{x}}_i}
+{p(x|\pnode{\bm{x}}_i, \pnode{x}_i = {#1})} \prod_{k \neq i}{\pi_{x}^{(t)}{(\pnode{x}_k)}}
+}
+
+\newcommand{\PiX}[1]{
+    \displaystyle\lambda_{x}{(x = #1)}\prod_{k \neq j}{\lambda_{\cnode{x}_k}^{(t)}{(x = #1)}} \sum_{\pnode{\bm{x}}}{p(x = #1|\pnode{\bm{x}})}\prod_{k}{\pi_{x}^{(t)}{(\pnode{x}_k)}}
+}

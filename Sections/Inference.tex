@@ -1,0 +1,227 @@
+\section{Fuzzy Risk Assessment}
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    Two problems in the inference of Bayesian network:\pause
+    \begin{itemize}
+      \item The operation of fuzzy probabilities would come up against a problem, where the result can produce a fuzzy probability not in the interval $[0,1]$.\pause
+      \item Many algorithms have been developed for Bayesian inference, such as probability propagation in trees of clusters, variable elimination algorithm, junction tree algorithm. These exact inference algorithms are NP-hard.
+    \end{itemize}
+
+    \pause
+    To solve the aforementioned problems, a novel inference algorithm named \textbf{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference} is proposed.
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    \begin{overlayarea}{\textwidth}{7cm}
+    Assuming that node $x$ is a node in Bayesian network $\bnt$. Its parent node set is $\pnode{\bm{x}} = \{\pnode{x}_1, \pnode{x}_2, \cdots, \pnode{x}_m\}$ and child node set is $\cnode{\bm{x}}=\{\cnode{x}_1, \cnode{x}_2, \cdots, \cnode{x}_n\}$.
+    \only<1-6>{The information spreading process is shown as following figure.
+    \begin{figure}
+      \centering
+      \input{./Figures/Information.Spreading.of.Baiyesian.Network}
+    \end{figure}
+    }
+    \only<7->{At the $(t+1)\text{th}$ iteration, the message that $x$ passes to its parent node $\pnode{x}_i$ is given by following equation.
+    \[
+    \scalebox{0.9}{$
+    \begin{bmatrix}
+        \lambda_x^{(t+1)}(\pnode{x}_i = F) \\[5pt]
+        \lambda_x^{(t+1)}(\pnode{x}_i = T)
+    \end{bmatrix}
+    = \beta
+    \begin{bmatrix}
+        \LambdaX{F} \\[15pt]
+        \LambdaX{T}
+    \end{bmatrix}$}\text{,}
+    \]
+
+    where $\pnode{\bm{x}}_i = \pnode{\bm{x}}\setminus\{\pnode{x}_i\}$. And the message that $x$ sends to its child node $\cnode{x}_j$ is given by following equation.
+    \[
+    \scalebox{0.9}{$
+    \begin{bmatrix}
+        \pi_{\cnode{x}_j}^{(t+1)}{(x = F)} \\[5pt]
+        \pi_{\cnode{x}_j}^{(t+1)}{(x = T)}
+    \end{bmatrix}
+    = \beta
+    \begin{bmatrix}
+        \PiX{F} \\[15pt]
+        \PiX{T}
+    \end{bmatrix}$}\text{.}
+    \]}
+    \end{overlayarea}
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    The function $\lambda_{x}(\var)$ is the message that the node $x$ sends to itself, which is presented as following equations.
+    \begin{align*}
+      \lambda_{x}{(x = F)} &=
+        \left\{\begin{array}{ll}
+        0, & \text{when $x \in \bm{E}$, and the value of observed $x$ \text is $T$,}\\[3pt]
+        1, & \text{otherwise.}
+        \end{array}\right.\\[5pt]
+      \lambda_{x}{(x = T)} &=
+        \left\{\begin{array}{ll}
+        0, & \text{when $x \in \bm{E}$, and the value of observed $x$ \text is $F$,}\\[3pt]
+        1, & \text{otherwise.}
+        \end{array}\right.
+    \end{align*}
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    At the end of $(t)$th iteration, the fuzzy belief of node $x$ is given by following equation.
+    \[
+    \begin{bmatrix}
+        {\rm Bel}^{(t)}(x = F)\\[5pt]
+        {\rm Bel}^{(t)}(x = T)
+    \end{bmatrix} = \beta
+    \begin{bmatrix}
+        \lambda^{(t)}(x = F)\cdot\pi^{(t)}(x = F)\\[5pt]
+        \lambda^{(t)}(x = T)\cdot\pi^{(t)}(x = T)
+    \end{bmatrix}\text{,}
+    \]\pause
+    where
+    \begin{flalign*}
+      &&
+      \begin{bmatrix}
+        \lambda^{(t)}(x = F)\\[5pt]
+        \lambda^{(t)}(x = T)
+      \end{bmatrix} & =
+      \begin{bmatrix}
+        \displaystyle\lambda_{x}(x = F)\prod_{j}{\lambda_{\cnode{x}_j}^{(t)}{(x = F)}} & \\[15pt]
+        \displaystyle\lambda_{x}(x = T)\prod_{j}{\lambda_{\cnode{x}_j}^{(t)}{(x = T)}}
+      \end{bmatrix}
+      \text{,}\\
+    \text{and} &&
+      \begin{bmatrix}
+        \pi^{(t)}(x = F) \\[5pt]
+        \pi^{(t)}(x = T)
+      \end{bmatrix} &=
+      \begin{bmatrix}
+        \displaystyle\sum_{\pnode{\bm{x}}}{P(x = F|\pnode{\bm{x}})}\prod_{k}{\pi_{x}^{(t)}{(\pnode{x}_k)}} \\[15pt]
+        \displaystyle\sum_{\pnode{\bm{x}}}{P(x = T|\pnode{\bm{x}})}\prod_{k}{\pi_{x}^{(t)}{(\pnode{x}_k)}}
+      \end{bmatrix}\text{.} &
+    \end{flalign*}
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    The iteration will be terminated when at least one of the conditions which are shown in following inequations are satisfied.
+    \begin{gather*}
+        t \geq t_{\max}\text{,}\\
+        \forall x \in \bnt,\hspace{0.5em} D\big({\rm Bel}^{(t)}{(x = T)},{\rm Bel}^{(t-1)}{(x = T)}\big) \leq \lthreshold\text{,}
+    \end{gather*}\pause
+    where $D\big({\rm Bel}^{(t)}{(x = T)},{\rm Bel}^{(t-1)}{(x = T)}\big)$ represents the Hamming distance between two fuzzy numbers ${\rm Bel}^{(t)}{(x = T)}$ and ${\rm Bel}^{(t-1)}{(x = T)}$. The Hamming distance is defined as following equation.
+    \[
+        D\big({\rm Bel}^{(t)}{(x = T)},{\rm Bel}^{(t-1)}{(x = T)}\big)=\int _{0}^{1}{\big|\mu^{(t)}{(\rho)}-\mu^{(t-1)}{(\rho)}\big|}\dif \rho \text{.}
+    \]\pause
+    When the iteration is terminated, the ${\rm Bel}^{(t)}{(x)}$ is considered to be the approximate posterior fuzzy probability of node $x$ under the evidence set $\bm{E}$.
+    \[
+        \fp{p}(x = T|\bm{E}) \approx {\rm Bel}^{(t)}{(x = T)} \text{.}
+    \]
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    It is note that, there are only two kinds of operations of fuzzy probability in the inference of the fuzzy Bayesian network: addition and multiplication.\pause
+
+    The fuzzy numbers are expressed by \acuts for calculation. For example, the triangular fuzzy probability $\fp{p}=\fpe{}$ is defined as following equation.
+    \[
+    \mu{(\rho)}=
+    \left\{\begin{array}{@{\,}l@{}ll}
+      & \dfrac{\rho-\pl{p}}{p - \pl{p}}, & \text{when $\pl{p} \leq \rho \leq p$,}\\[10pt]
+    - & \dfrac{\rho-\pu{p}}{\pu{p} - p}, & \text{when $p < \rho \leq \pu{p}$,}\\[10pt]
+      & 0,                               & \text{otherwise}.
+    \end{array}\right.
+    \]
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    There are two expression of fuzzy probability:
+    \begin{flalign*}
+      && \fp{p} &= \fpe{}\text{,} & \\
+      && \fp{p} &= \big[\ell(\alpha),u(\alpha)\big], \forall \alpha\in[0,1]\text{,} & \\
+    \text{where} &&
+      \ell(\alpha) &= \alpha(p-\pl{p})+\pl{p}\text{,} & \\
+      && u(\alpha) &= \pu{p}-\alpha(\pu{p}-p)\text{.} &
+    \end{flalign*}\pause
+
+    The relationship between two kinds of expressions are shown in the following figure.
+    \begin{figure}
+      \centering
+      \input{./Figures/Relationship.between.Membership.Function.and.Acuts}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    The basic operations of addition and multiplication between fuzzy numbers used in LBP algorithm are given as following equations.
+    \begin{align*}
+      \action<+->{\fp{n}_1+\fp{n}_2 & = \big[\ell_1(\alpha), u_1(\alpha)\big] + \big[\ell_2(\alpha), u_2(\alpha)\big]\\
+      &= \big[\ell_1(\alpha)+\ell_2(\alpha), u_1(\alpha)+u_2(\alpha)\big], \forall \alpha \in [0, 1]\text{,}\\}
+      \action<+->{\fp{n}_1\times\fp{n}_2 & = \big[\ell_1(\alpha), u_1(\alpha)\big] \times \big[\ell_2(\alpha), u_2(\alpha)\big] \\
+      &= \big[\ell_1(\alpha)\times\ell_2(\alpha), u_1(\alpha)\times u_2(\alpha)\big], \forall \alpha \in [0, 1]\text{.}}
+      \action<+->{\intertext{It is noted that, a crisp number can be regarded as a special fuzzy number whose membership function is a unit-impulse function. Therefore, the operations between fuzzy number and crisp number are shown as following equations.}
+      \fp{n}_1+n_2 &= \big[\ell_1(\alpha), u_1(\alpha)\big] + n_2 \\
+      &= \big[\ell_1(\alpha)+n_2, u_1(\alpha)+n_2\big], \forall \alpha \in [0, 1]\text{,}\\}
+      \action<+->{\fp{n}_1\times n_2 &= \big[\ell_1(\alpha), u_1(\alpha)\big] \times n_2 \\
+      &= \big[\ell_1(\alpha)\times n_2, u_1(\alpha)\times n_2\big], \forall \alpha \in [0, 1]\text{.}}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+    In this paper, the normalization algorithm developed by Dubois and Prade\footnote{ Didier Dubois and Henri Prade. The use of fuzzy numbers in decision analysis. \emph{Fuzzy information and decision processes}, pages 309–321, 1982.} are employed to normalize the fuzzy numbers. Assuming $\fp{n}_1$ and $\fp{n}_2$ are two fuzzy numbers, the normalization algorithm is shown as the following equation.
+    \[
+    \beta
+    \begin{bmatrix}
+      \fp{n}_1 \\[5pt]
+      \fp{n}_2
+    \end{bmatrix} =
+    \begin{bmatrix}
+    \bigg[\dfrac{\ell_1(\alpha)}{\ell_1(\alpha) + u_2(\alpha)}, \dfrac{u_1(\alpha)}{u_1(\alpha) + \ell_2(\alpha)}\bigg], \forall \alpha \in [0, 1]\\[15pt]
+    \bigg[\dfrac{\ell_2(\alpha)}{\ell_2(\alpha) + u_1(\alpha)}, \dfrac{u_2(\alpha)}{u_2(\alpha) + \ell_1(\alpha)}\bigg], \forall \alpha \in [0, 1]
+    \end{bmatrix}\text{.}
+    \]
+\end{frame}
+
+\begin{frame}{$\bm{\alpha}$-cuts Based Fuzzy Bayesian Approximate Inference}
+In the process of Bayesian inference, it is hard to calculate the analytical expression of the iterating results.\pause
+
+To solve this problem that is hard to obtain the analytical expression, a compromised computation strategy is proposed. This computation strategy adopts finite interval values to represent a fuzzy number approximately.\pause
+
+There is a set of $\alpha \in [0, 1]$ which is denoted by $\bm{\alpha} = \{\alpha_1, \alpha_2, \cdots, \alpha_n\}$, $\forall i, j = 1, 2, \cdots, n$, if $i \neq j$, then $\alpha_i \neq \alpha_j$. \pause In this paper, for a fuzzy number $\big[\ell(\alpha), u(\alpha)\big], \forall \alpha \in [0, 1]$, the proposed computation strategy is to calculate the finite interval values $\big[\ell(\alpha), u(\alpha)\big], \forall \alpha \in \bm{\alpha}$. \pause In this paper, the set of $\alpha$ which is shown in the following equation is suggested.
+\[
+  \bm{\alpha} = \bigg\{\alpha_i\Big| \alpha_i = \frac{i-1}{n-1}, i = 1, 2, \cdots, n\bigg\}\text{.}
+\]
+\end{frame}
+
+\begin{frame}{Data Filter}
+    The architecture of the data filter is shown in the following figure.
+
+    \resizebox{\textwidth}{!}{\input{./Figures/Architecture.of.the.Data.Filter}}
+\end{frame}
+
+\begin{frame}{Data Filter}
+    In this paper, for the invalidation evidences and the incident evidences, an index $C(x = T)$ is proposed to measure the confidence level of an evidence $x = T$, which is shown as the following equation.
+    \[
+      C(x = T) = \max_{\bm{p}\in\bm{P}}\Big\{
+        \sum_{i=m}^n \binom{i}{n} \eta^i(1-\eta)^{n-i}
+      \Big\}\text{,}
+    \]\pause
+    where $\bm{P}$ is the path set of node $x$, $n$ is the number of elements in path $\bm{p}$, $m$ is the number of elements in the set $\bm{p}\setminus\bm{E}$, $\eta$ is the false negatives rate of IDS. \pause If the condition which is shown in the following equation is satisfied, the evidence $x = T$ is regarded as noise evidence caused by system faults.
+    \[
+        C(x = T) < C_{\min}\text{,}
+    \]\pause
+    where $C_{\min}$ is the minimum value of evidence confidence level, and $C_{\min}$ can be equal to $2.5\%$, $5\%$, etc.
+\end{frame}
+
+\begin{frame}{Data Filter}
+    If a function node $f$ has only one path $\bm{p} = \{a_1, a_2, \cdots, a_{10}\}$. Now, there are only $a_1$, $a_2$, and $a_3$ are detected by IDS, and the invalidation of this function is detected by invalidation evidence identifier. The false negatives rate of IDS $\eta = 2.5\%$ and the minimum evidence confidence level $C_{\min} = 1\%$. \pause So, the false negatives number $m$ obeys the binomial distribution $B(10,0.025)$. \pause The confidence level of evidence $f = T$ is shown as the following equation.
+    \begin{align*}
+        C(f = T) &= \sum_{i=7}^{10} \binom{i}{10} 0.025^i(1-0.025)^{10-i}\\
+                 & = 6.8542 \cdot 10^{-10}\text{.}
+    \end{align*}\pause
+    Because $C(f = T) = 6.8542 \cdot 10^{-10} < C_{\min}$, the evidence $f = T$ is a noise evidence.
+\end{frame}
+
+\begin{frame}{Risk Assessment}
+    The evidences generated by attack evidence pool, invalidation evidence identifier, and incident evidence identifier, are sent to the noise filter. \pause The \abfbai{} engine receives the evidences without noise caused by system faults, then calculates the fuzzy probabilities of all asset nodes $\fp{p}(z)$. \pause At last, the current cybersecurity risk can be assessed by the following equation.
+    \[
+    \fp{\risk}=\sum_{z\in\bnt}{\fp{p}{(z)}\cdot v(z)}\text{,}
+    \]\pause
+    where $v(z)$ is the value of the asset $z$.
+\end{frame}
