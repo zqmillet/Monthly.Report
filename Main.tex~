@@ -9,5 +9,4 @@
 \input{./Sections/Inference}
 \input{./Sections/Simulation}
 \input{./Sections/Planning}
-
 \end{document}
