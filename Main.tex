@@ -1,13 +1,15 @@
+%!TEX program = xelatex
+%!TEX builder = latexmk
+
 \documentclass[10pt]{beamer}
 \input{./Configuration}
 
 \begin{document}
-\input{./Sections/Cover}
-\input{./Sections/Outline}
-\input{./Sections/Architecture}
-\input{./Sections/Modelling}
-\input{./Sections/Inference}
-\input{./Sections/Simulation}
-\input{./Sections/Planning}
-
+    \input{./Sections/Cover}
+    \input{./Sections/Outline}
+    \input{./Sections/SimulationPlatform}
+    \input{./Sections/SimulationStateController}
+    \input{./Sections/SimulationOptimalDefenseStrategyGenerator}
+    \input{./Sections/SimulationRealTimeCapability}
+    \input{./Sections/Planning}
 \end{document}

@@ -1,7 +1,12 @@
+%!TEX root = ./Main.tex
+
 \usepackage{Theme/BeamerTheme}
 \usefonttheme[onlymath]{serif}
 \usepackage{hyperref}
 \hypersetup{pdfpagemode=FullScreen}
+% \usepackage{silence}
+% \WarningFilter{latex}{You have requested package}
+
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
@@ -142,30 +147,6 @@
 \newtheorem{prop}{Proposition}
 
 % The follow codes are macros for frequent terms.
-\newcommand{\etal}{\emph{et al}.}
-\newcommand{\risk}{\mathscr{R}}
-\newcommand{\pu}[1]{\overline{#1}{}} % probability upper
-\newcommand{\pl}[1]{\underline{#1}{}} % probability lower
-\newcommand{\fp}[1]{\widetilde{#1}{}} % fuzzy probability
-\newkeycommand{\fpe}[symbol = p][1]{ % fuzzy probability expansion
-    (\pl{\commandkey{symbol}}_{#1}, \commandkey{symbol}_{#1}, \pu{\commandkey{symbol}}_{#1})
-}
-\newcommand{\acuts}{$\alpha$-cuts{}}
-\newcommand{\acut}[1]{{}^{\alpha}\hspace{-1.8pt}{#1}}
-\newcommand{\abfbai}{\acuts{} based fuzzy Bayesian approximate inference}
-\newcommand{\Abfbai}{\acuts{} Based Fuzzy Bayesian Approximate Inference}
-\newcommand{\lthreshold}{D_{\min}}
-\newcommand{\bnt}{\mathscr{B}}
-\newcommand{\cmodel}{\mathscr{C}}
-\newcommand{\pnode}[1]{{}^{*}\hspace{-1.4pt}{#1}}
-\newcommand{\cnode}[1]{{#1}^*}
-\newcommand{\var}{\hspace{1pt}\cdot\hspace{1pt}}
 
-\newcommand{\LambdaX}[1]{
-    \displaystyle\sum_{x}{\lambda_{x}{(x)}} \prod_{j}{\lambda_{\cnode{x}_j}^{(t)}{(x)}} \sum_{\pnode{\bm{x}}_i}
-{p(x|\pnode{\bm{x}}_i, \pnode{x}_i = {#1})} \prod_{k \neq i}{\pi_{x}^{(t)}{(\pnode{x}_k)}}
-}
-
-\newcommand{\PiX}[1]{
-    \displaystyle\lambda_{x}{(x = #1)}\prod_{k \neq j}{\lambda_{\cnode{x}_k}^{(t)}{(x = #1)}} \sum_{\pnode{\bm{x}}}{p(x = #1|\pnode{\bm{x}})}\prod_{k}{\pi_{x}^{(t)}{(\pnode{x}_k)}}
-}
+\newif\ifCompleteCompile
+\CompleteCompilefalse

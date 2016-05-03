@@ -97,7 +97,7 @@
 \newdimen\progressbar@tmpdim    % auxiliary dimension
 
 \progressbar@pbwd=20em
-\progressbar@pbht=0.5pt
+\progressbar@pbht=1pt
 
 % the progress bar
 \def\progressbar@progressbar{%
@@ -110,13 +110,17 @@
   \makebox[\textwidth][l]{
     \begin{tikzpicture}[tight background]
 
-      \node[anchor=west, white, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
+      \node[anchor=south west, inner sep=0pt] at (0pt, 0pt) {
+      \parbox{1.4\progressbar@pbwd}{
+        \begin{flushleft}
+          \textcolor{white}{\insertsectionHEAD}
+        \end{flushleft}
+      }};
 
       \draw[anchor=west, mDarkBrown, fill=mDarkBrown, inner sep=0pt]
-      (2pt, -16pt) rectangle ++ (1.4\progressbar@pbwd, \progressbar@pbht);
+      (2pt, -2pt) rectangle ++ (1.4\progressbar@pbwd, \progressbar@pbht);
 
-      \draw[anchor=west, mMediumBrown, fill=mMediumBrown, inner sep=0pt]
-      (2pt, -16pt) rectangle ++ (1.4\progressbar@tmpdim, \progressbar@pbht);
+      % \draw[anchor=west, mMediumBrown, fill=mMediumBrown, inner sep=0pt] (2pt, -2pt) rectangle ++ (1.4\progressbar@tmpdim, \progressbar@pbht);
     \end{tikzpicture}%
   }
 }
@@ -162,7 +166,8 @@
   \begingroup
   \setbeamercolor{background canvas}{bg=mDarkTeal}
   \begin{frame}[plain, noframenumbering]
-    \vspace{2em}\usebeamerfont{section title}
+    \vspace{2em}
+    \usebeamerfont{section title}
     \progressbar@progressbar%
   \end{frame}
   \endgroup
@@ -191,10 +196,20 @@
 %}}}
 %{{{ --- Frametitle -------------------
 \setbeamertemplate{frametitle}{%
+  \progressbar@tmpdim=\paperwidth
+  \multiply\progressbar@tmpdim by \insertframenumber
+  \divide\progressbar@tmpdim by \inserttotalframenumber
+
 \nointerlineskip
 \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.5ex,dp=1.5ex]{frametitle}
   %\usebeamerfont{frametitle}\MakeLowercase{\insertframetitle}%
   \usebeamerfont{frametitle}\insertframetitle%
+\end{beamercolorbox}\vspace{-5pt}%\hspace{-1pt}
+\begin{beamercolorbox}[wd=\paperwidth, leftskip=-1pt, ht=2pt]{frametitle}
+\begin{tikzpicture}[tight background]
+\draw[mDarkBrown, line width = 2pt] (0, 0) -- ++ (0:\paperwidth);
+\draw[mMediumBrown, line width = 2pt] (0, 0) -- ++ (0:\progressbar@tmpdim);
+\end{tikzpicture}
 \end{beamercolorbox}
 }
 %}}}
