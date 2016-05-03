@@ -1,6 +1,6 @@
 %!TEX root = ../Main.tex
 
-\section{Simulation Platform}
+\section{Introduction of Simulation Platform}
 
 \begin{frame}{The Structure of Chemical Reactor Control System}
   \begin{overlayarea}{\textwidth}{7cm}
@@ -16,16 +16,16 @@
 \end{frame}
 
 \begin{frame}{Attack Analysis}
-  The potential attacks are shown as follows.\vspace{5pt}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The potential attacks are shown as follows.\vspace{10pt}
 
   \scriptsize
   \extrarowsep = 2mm
-  \begin{overlayarea}{\textwidth}{6cm}
   \begin{tabu}{@{}X[-1, c, m]X[4, m]X[3.5, m]@{}}
   \tabucline[1pt]{-}
   Symbol & Description & Launch Condition\\
   \tabucline[1pt]{-}
-    \only<1>{
+    \only<+>{
       $a_{ 1}$ & network scanning of the Ethernet in the management layer           & ---\\\hline
       $a_{ 2}$ & vulnerability scanning of the devices in the management layer      & launch of $a_{1}$                                                     \\\hline
       $a_{ 3}$ & buffer overflow attack on the web server                           & launch of $a_{2}$                                                     \\\hline
@@ -35,7 +35,7 @@
       $a_{ 7}$ & brute force attack on the personal computer 3                      & launch of $a_{2}$                                                     \\\hline
       $a_{ 8}$ & network scanning of the industrial Ethernet 1 in the control layer & launch of $a_{3}$, $a_{4}$, $a_{5}$, $a_{6}$, $a_{7}$                 \\\tabucline[1pt]{-}
     }
-    \only<2>{
+    \only<+>{
       $a_{ 9}$ & vulnerability scanning of the devices in the industrial Ethernet 1 & launch of $a_{8}$                                                     \\\hline
       $a_{10}$ & buffer overflow attack on the data server 1                        & launch of $a_{9}$                                                     \\\hline
       $a_{11}$ & brute force attack on the data server 1                            & launch of $a_{9}$                                                     \\\hline
@@ -45,7 +45,7 @@
       $a_{15}$ & buffer overflow attack on the data server 2                        & launch of $a_{14}$                                                    \\\hline
       $a_{16}$ & brute force attack on the data server 2                            & launch of $a_{14}$                                                    \\\tabucline[1pt]{-}
     }
-    \only<3>{
+    \only<+>{
       $a_{17}$ & brute force attack on the engineer station 2                       & launch of $a_{14}$                                                    \\\hline
       $a_{18}$ & network scanning of the industrial Ethernet 3 in the control layer & launch of $a_{3}$, $a_{4}$, $a_{5}$, $a_{6}$, $a_{7}$                 \\\hline
       $a_{19}$ & vulnerability scanning of the devices in the industrial Ethernet 3 & launch of $a_{18}$                                                    \\\hline
@@ -55,7 +55,7 @@
       $a_{23}$ & DoS attack on PLC1                                                 & launch of $a_{10}$, $a_{11}$, $a_{12}$                                \\\hline
       $a_{24}$ & DoS attack on PLC2                                                 & launch of $a_{10}$, $a_{11}$, $a_{12}$                                \\\tabucline[1pt]{-}
     }
-    \only<4>{
+    \only<+>{
       $a_{25}$ & DoS attack on PLC3                                                 & launch of $a_{10}$, $a_{11}$, $a_{12}$                                \\\hline
       $a_{26}$ & DoS attack on PLC4                                                 & launch of $a_{10}$, $a_{11}$, $a_{12}$                                \\\hline
       $a_{27}$ & DoS attack on PLC5                                                 & launch of $a_{15}$, $a_{16}$, $a_{17}$                                \\\hline
@@ -65,7 +65,7 @@
       $a_{31}$ & DoS attack on PLC9                                                 & launch of $a_{20}$, $a_{21}$, $a_{22}$                                \\\hline
       $a_{32}$ & DoS attack on PLC10                                                & launch of $a_{20}$, $a_{21}$, $a_{22}$                                \\\tabucline[1pt]{-}
     }
-    \only<5>{
+    \only<+>{
       $a_{33}$ & DoS attack on PLC11                                                & launch of $a_{20}$, $a_{21}$, $a_{22}$                                \\\hline
       $a_{34}$ & DoS attack on PLC12                                                & launch of $a_{20}$, $a_{21}$, $a_{22}$                                \\\hline
       $a_{35}$ & man-in-the-middle attack on PLC1                                   & launch of $a_{12}$                                                    \\\hline
@@ -74,7 +74,7 @@
       $a_{38}$ & man-in-the-middle attack on PLC4                                   & launch of $a_{12}$                                                    \\\hline
       $a_{39}$ & man-in-the-middle attack on PLC5                                   & launch of $a_{17}$                                                    \\\hline
       $a_{40}$ & man-in-the-middle attack on PLC6                                   & launch of $a_{17}$                                                    \\\tabucline[1pt]{-}
-    }\only<6>{
+    }\only<+>{
       $a_{41}$ & man-in-the-middle attack on PLC7                                   & launch of $a_{17}$                                                    \\\hline
       $a_{42}$ & man-in-the-middle attack on PLC8                                   & launch of $a_{17}$                                                    \\\hline
       $a_{43}$ & man-in-the-middle attack on PLC9                                   & launch of $a_{22}$                                                    \\\hline
@@ -87,16 +87,16 @@
 \end{frame}
 
 \begin{frame}{Function Analysis}
-  The system functions are shown as follows.\vspace{5pt}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The system functions are shown as follows.\vspace{10pt}
 
   \scriptsize
   \extrarowsep = 2mm
-  \begin{overlayarea}{\textwidth}{6cm}
   \begin{tabu}{@{}X[-1, c, m]X[4, m]X[3.5, m]@{}}
   \tabucline[1pt]{-}
   Symbol & Description & Failure Condition\\
   \tabucline[1pt]{-}
-    \only<1>{
+    \only<+>{
       $f_{ 1}$ & distillation                                                       & failure of $f_{2}$, $f_{3}$                                           \\\hline
       $f_{ 2}$ & the temperature control function of distillation column            & failure of $f_{4}$, $f_{6}$, $f_{7}$, $f_{8}$                         \\\hline
       $f_{ 3}$ & the pressure control function of distillation column               & failure of $f_{5}$, $f_{7}$, $f_{9}$                                  \\\hline
@@ -106,7 +106,7 @@
       $f_{ 7}$ & the switch control function of S1                                  & launch of $a_{24}$, $a_{36}$                                          \\\hline
       $f_{ 8}$ & the temperature sensation function of distillation column          & launch of $a_{25}$, $a_{37}$                                          \\\tabucline[1pt]{-}
     }
-    \only<2>{
+    \only<+>{
       $f_{ 9}$ & the pressure sensation function of distillation column             & launch of $a_{25}$, $a_{37}$                                          \\\hline
       $f_{10}$ & heating                                                            & failure of $f_{11}$, $f_{12}$, $f_{13}$                               \\\hline
       $f_{11}$ & the temperature control function of reactor 1                      & failure of $f_{14}$, $f_{15}$, $f_{16}$, $f_{18}$, $f_{19}$           \\\hline
@@ -116,7 +116,7 @@
       $f_{15}$ & the traffic control function of V5                                 & launch of $a_{27}$, $a_{39}$                                          \\\hline
       $f_{16}$ & the traffic control function of V7                                 & launch of $a_{30}$, $a_{42}$                                          \\\tabucline[1pt]{-}
     }
-    \only<3>{
+    \only<+>{
       $f_{17}$ & the pressure reducing function of reactor 1                        & launch of $a_{30}$, $a_{42}$                                          \\\hline
       $f_{18}$ & the switch control function of S2                                  & launch of $a_{28}$, $a_{40}$                                          \\\hline
       $f_{19}$ & the temperature sensation function of reactor 1                    & launch of $a_{29}$, $a_{41}$                                          \\\hline
@@ -126,7 +126,7 @@
       $f_{23}$ & the temperature control function of reactor 2                      & failure of $f_{27}$, $f_{30}$, $f_{31}$, $f_{33}$                     \\\hline
       $f_{24}$ & the pressure control function of reactor 2                         & failure of $f_{28}$, $f_{32}$, $f_{33}$                               \\\tabucline[1pt]{-}
     }
-    \only<4>{
+    \only<+>{
       $f_{25}$ & the mixing function of reactor 2                                   & launch of $a_{32}$, $a_{44}$                                          \\\hline
       $f_{26}$ & the level control function of reactor 2                            & failure of $f_{29}$, $f_{30}$, $f_{31}$                               \\\hline
       $f_{27}$ & the temperature sensation function of reactor 2                    & launch of $a_{33}$, $a_{45}$                                          \\\hline
@@ -136,7 +136,7 @@
       $f_{31}$ & the traffic control function of V10                                & launch of $a_{34}$, $a_{46}$                                          \\\hline
       $f_{32}$ & the pressure reducing function of reactor 2                        & launch of $a_{34}$, $a_{46}$                                          \\\tabucline[1pt]{-}
     }
-    \only<5>{
+    \only<+>{
       $f_{33}$ & the switch control function of S3                                  & launch of $a_{32}$, $a_{44}$                                          \\\hline
       $f_{34}$ & production scheduling                                              & failure of $f_{35}$, $f_{36}$, $f_{37}$, $f_{41}$, $f_{42}$, $f_{43}$ \\\hline
       $f_{35}$ & the production scheduling function provided by personal computer 1 & failure of $f_{38}$, $f_{39}$, $f_{40}$                               \\\hline
@@ -146,7 +146,7 @@
       $f_{39}$ & the data service of industrial Ethernet 2                          & some security strategies                                              \\\hline
       $f_{40}$ & the data service of industrial Ethernet 3                          & some security strategies                                              \\\tabucline[1pt]{-}
     }
-    \only<6>{
+    \only<+>{
       $f_{41}$ & the configuration of PLCs of distillation column                   & some security strategies                                              \\\hline
       $f_{42}$ & the configuration of PLCs of reactor 1                             & some security strategies                                              \\\hline
       $f_{43}$ & the configuration of PLCs of reactor 2                             & some security strategies                                              \\\tabucline[1pt]{-}
@@ -156,16 +156,16 @@
 \end{frame}
 
 \begin{frame}{Incident Analysis}
-  The potential hazardous incidents are shown as follows.\vspace{5pt}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The potential hazardous incidents are shown as follows.\vspace{10pt}
 
   \scriptsize
   \extrarowsep = 2mm
-  \begin{overlayarea}{\textwidth}{6cm}
   \begin{tabu}{@{}X[-1, c, m]X[3, m]X[2.5, m]X[2, m]@{}}
   \tabucline[1pt]{-}
   Symbol & Description & Location & Inducement\\
   \tabucline[1pt]{-}
-    \only<1>{
+    \only<+>{
       $e_{ 1}$ & pressure anomaly                       & distillation column       & failure of $f_{3}$                                                    \\\hline
       $e_{ 2}$ & temperature anomaly                    & distillation column       & failure of $f_{2}$                                                    \\\hline
       $e_{ 3}$ & traffic of anomaly                     & distillation column       & failure of $f_{4}$, $f_{6}$                                           \\\hline
@@ -175,7 +175,7 @@
       $e_{ 7}$ & excessive liquid level                 & reactor 1                 & failure of $f_{13}$                                                   \\\hline
       $e_{ 8}$ & low liquid level                       & reactor 1                 & failure of $f_{13}$                                                   \\\tabucline[1pt]{-}
     }
-    \only<2>{
+    \only<+>{
       $e_{ 9}$ & explosion                              & reactor 1                 & occurrence of $e_{4}$                                                 \\\hline
       $e_{10}$ & heater dry fired                       & reactor 1                 & occurrence of $e_{8}$                                                 \\\hline
       $e_{11}$ & liquid overflow                        & reactor 1                 & occurrence of $e_{7}$                                                 \\\hline
@@ -185,7 +185,7 @@
       $e_{15}$ & excessive liquid level                 & reactor 2                 & failure of $f_{26}$                                                   \\\hline
       $e_{16}$ & low liquid level                       & reactor 2                 & failure of $f_{26}$                                                   \\\tabucline[1pt]{-}
     }
-    \only<3>{
+    \only<+>{
       $e_{17}$ & explosion                              & reactor 2                 & occurrence of $e_{12}$                                                \\\hline
       $e_{18}$ & heater dry fired                       & reactor 2                 & occurrence of $e_{16}$                                                \\\hline
       $e_{19}$ & liquid overflow                        & reactor 2                 & occurrence of $e_{15}$                                                \\\hline
@@ -200,16 +200,16 @@
 \end{frame}
 
 \begin{frame}{Asset Analysis}
-  The system assets are shown as follows.\vspace{5pt}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The system assets are shown as follows.\vspace{10pt}
 
   \scriptsize
   \extrarowsep = 2mm
-  \begin{overlayarea}{\textwidth}{6cm}
   \begin{tabu}{@{}X[-1, c, m]X[3, m]X[-1, m]X[2.5, m]@{}}
   \tabucline[1pt]{-}
   Symbol & Description & Value(\$) & Hazardous Incident\\
   \tabucline[1pt]{-}
-    \only<1>{
+    \only<+>{
       $z_{ 1}$ & semi-product s01 and s02               &  30,000                   & $e_{1}$, $e_{2}$, $e_{3}$, $e_{21}$, $e_{24}$                         \\\hline
       $z_{ 2}$ & product s03                            &  60,000                   & $e_{5}$, $e_{6}$, $e_{9}$, $e_{11}$, $e_{22}$, $e_{24}$               \\\hline
       $z_{ 3}$ & product s04                            &  70,000                   & $e_{13}$, $e_{14}$, $e_{17}$, $e_{20}$, $e_{23}$, $e_{24}$            \\\hline
@@ -219,7 +219,7 @@
       $z_{ 7}$ & heater of reactor 2                    &  50,000                   & $e_{17}$, $e_{18}$                                                    \\\hline
       $z_{ 8}$ & staff 1-4                              & 800,000                   & $e_{9}$, $e_{11}$                                                     \\\tabucline[1pt]{-}
     }
-    \only<2>{
+    \only<+>{
       $z_{ 9}$ & staff 5-9                              & 100,000                   & $e_{17}$, $e_{19}$                                                    \\\hline
       $z_{10}$ & river and solid                        & 900,000                   & $e_{9}$, $e_{11}$, $e_{17}$, $e_{19}$                                 \\\hline
       $z_{11}$ & air                                    & 400,000                   & $e_{9}$, $e_{17}$                                                     \\\tabucline[1pt]{-}
@@ -229,14 +229,100 @@
 \end{frame}
 
 \begin{frame}{Multi-Level Bayesian Network}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The multi-level Bayesian network is shown in the following figure.\vspace{-15pt}
+  \begin{center}
+    \resizebox{\textwidth}{!}{
+      \ifCompleteCompile
+        \input{./Figures/StructureOfBayesianNetwork}
+      \fi
+    }
+  \end{center}  
+  \end{overlayarea} 
 \end{frame}
 
 \begin{frame}{Process Model}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The process model is shown in the following figure.
+  \begin{center}
+    %\ifCompleteCompile
+      \input{./Figures/StructureOfProcessModel}
+    %\fi
+  \end{center}
+  \tabulinesep = 4pt
+  \begin{tabu}to \textwidth{@{}X[-1, c]X|X[-1, c]X[-1]X[-1]@{}}
+    \tabucline[1pt]{-}
+    Symbol & Description      & Symbol & Description   & Value(\$)\\
+    \hline
+    $p_1$ & distillation      & $s_1$ & semi-product 1 & $10,000$\\
+    $p_2$ & heating           & $s_2$ & semi-product 2 & $20,000$\\
+    $p_3$ & mixing \& heating & $s_3$ & product 1      & $50,000$\\
+          &                   & $s_4$ & product 2      & $70,000$\\
+    \tabucline[1pt]{-} 
+  \end{tabu}  
+  \end{overlayarea} 
 \end{frame}
 
 \begin{frame}{Security Strategies}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The security strategies are shown as follows.\vspace{10pt}
+
+  \scriptsize
+  \extrarowsep = 2mm
+  \begin{tabu}to \textwidth{@{}X[-1, c, m]X[m]*2{X[-1, m]}@{}}
+  \tabucline[1pt]{-}
+  Symbol & Description & Prevented Attacks & Invalidated Functions\\
+  \tabucline[1pt]{-}
+  \only<+>{
+    $m_{ 1}$ & shut down the web server              & $a_{3}$, $a_{4}$                       & ---      \\\hline
+    $m_{ 2}$ & shut down the personal computer 1     & $a_{5}$                                & $f_{35}$ \\\hline
+    $m_{ 3}$ & shut down the personal computer 2     & $a_{6}$                                & $f_{36}$ \\\hline
+    $m_{ 4}$ & shut down the personal computer 3     & $a_{7}$                                & $f_{37}$ \\\hline
+    $m_{ 5}$ & disconnect the security gateway 1     & $a_{8}$                                & $f_{38}$ \\\hline
+    $m_{ 6}$ & shut down the data server 1           & $a_{10}$, $a_{11}$                     & $f_{38}$ \\\hline
+    $m_{ 7}$ & shut down the engineer station 1      & $a_{12}$                               & $f_{41}$ \\\hline
+    $m_{ 8}$ & encrypt the data amongst the PLC 1-4  & $a_{35}$, $a_{36}$, $a_{37}$, $a_{38}$ & ---      \\\tabucline[1pt]{-}
+  }
+  \only<+>{
+    $m_{ 9}$ & disconnect the security gateway 2     & $a_{13}$                               & $f_{39}$ \\\hline
+    $m_{10}$ & shut down the data server 2           & $a_{15}$, $a_{16}$                     & $f_{39}$ \\\hline
+    $m_{11}$ & shut down the engineer station 2      & $a_{17}$                               & $f_{42}$ \\\hline
+    $m_{12}$ & encrypt the data amongst the PLC 5-8  & $a_{39}$, $a_{40}$, $a_{41}$, $a_{42}$ & ---      \\\hline
+    $m_{13}$ & disconnect the security gateway 3     & $a_{18}$                               & $f_{40}$ \\\hline
+    $m_{14}$ & shut down the data server 3           & $a_{20}$, $a_{21}$                     & $f_{40}$ \\\hline
+    $m_{15}$ & shut down the engineer station 3      & $a_{22}$                               & $f_{43}$ \\\hline
+    $m_{16}$ & encrypt the data amongst the PLC 9-12 & $a_{43}$, $a_{44}$, $a_{45}$, $a_{46}$ & ---      \\\tabucline[1pt]{-}
+  }
+  \end{tabu}
+  \end{overlayarea} 
 \end{frame}
 
 \begin{frame}{Recovery Strategies}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The recovery strategies are shown as follows.\vspace{10pt}
 
+  \scriptsize
+  \extrarowsep = 2mm
+  \begin{tabu}to \textwidth{@{}X[-1, c]X[-1]XX[-1, r]@{}}
+  \tabucline[1pt]{-}
+  Symbol & Description & Recovered Functions & Cost(\$) \\
+  \tabucline[1pt]{-}
+  \only<+>{  
+    $n_{ 1}$ & reboot PLC1                           & $f_{4}$                                & $ 9,000$ \\\hline
+    $n_{ 2}$ & reboot PLC2                           & $f_{7}$                                & $ 9,000$ \\\hline
+    $n_{ 3}$ & reboot PLC3                           & $f_{8}$, $f_{9}$                       & $10,000$ \\\hline
+    $n_{ 4}$ & reboot PLC4                           & $f_{5}$, $f_{6}$                       & $15,000$ \\\hline
+    $n_{ 5}$ & reboot PLC5                           & $f_{14}$, $f_{15}$                     & $ 8,000$ \\\hline
+    $n_{ 6}$ & reboot PLC6                           & $f_{18}$                               & $10,000$ \\\hline
+    $n_{ 7}$ & reboot PLC7                           & $f_{19}$, $f_{20}$, $f_{21}$           & $ 2,000$ \\\hline
+    $n_{ 8}$ & reboot PLC8                           & $f_{16}$, $f_{17}$                     & $13,000$ \\\tabucline[1pt]{-}
+  }
+  \only<+>{
+    $n_{ 9}$ & reboot PLC9                           & $f_{30}$                               & $14,000$ \\\hline
+    $n_{10}$ & reboot PLC10                          & $f_{25}$, $f_{33}$                     & $ 7,500$ \\\hline
+    $n_{11}$ & reboot PLC11                          & $f_{27}$, $f_{28}$, $f_{29}$           & $14,000$ \\\hline
+    $n_{12}$ & reboot PLC12                          & $f_{31}$, $f_{32}$                     & $11,000$ \\\tabucline[1pt]{-} 
+  }
+  \end{tabu}
+  \end{overlayarea} 
 \end{frame}

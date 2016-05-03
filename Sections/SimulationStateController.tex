@@ -2,19 +2,101 @@
 
 \section{Simulation of State Controller}
 
+\newcommand{\YES}{$\surd$}
+\newcommand{\NO}{$\times$}
+
 \begin{frame}{Definition of System State}
-    
+  \begin{overlayarea}{\textwidth}{7cm}
+  The state space of this chemical reactor control system is defined as 
+  \[
+    \bm{F} = (F_1, F_{10}, F_{22}, F_{34})\text{,}
+  \]
+  where
+  \[
+    F_i = \left\{
+    \begin{array}{ll}
+      0, & \text{the system function $f_i$ runs normally,}\\
+      1, & \text{otherwise.}
+    \end{array}
+    \right.
+  \]
+
+  \tabulinesep = 5pt
+  \resizebox{\textwidth}{!}{
+  \begin{tabu}to 1.6\textwidth{X[-1,c]|X[-1]|*{16}{X[-1]}}
+  \tabucline[1pt]{-}
+  Symbol  & Description           & \multicolumn{16}{c}{System States}\\
+  \hline
+  $f_{ 1}$  & distillation          & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$\\
+  $f_{10}$  & heating               & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$\\
+  $f_{22}$  & mixing \& heating     & $0$ & $0$ & $1$ & $1$ & $0$ & $0$ & $1$ & $1$ & $0$ & $0$ & $1$ & $1$ & $0$ & $0$ & $1$ & $1$\\
+  $f_{34}$  & production scheduling & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$\\
+  \hline
+  \multicolumn{2}{l|}{Is the System State Feasible?} & \YES & \NO & \NO & \NO & \NO & \NO & \NO & \NO & \NO & \YES & \NO & \YES & \NO & \YES & \NO & \YES\\
+  \tabucline[1pt]{-}
+  \multicolumn{18}{l}{Notes:}\\
+  \multicolumn{18}{l}{\hspace{2em}``\YES'' means system state is feasible;}\\
+  \multicolumn{18}{l}{\hspace{2em}``\NO'' means system state is unfeasible.}\\
+  \end{tabu}
+  }
+  \end{overlayarea} 
 \end{frame}
 
-\begin{frame}{Attack Scenario}
-    
+\begin{frame}{Attack Scenario and Evidence List}
+  \begin{overlayarea}{\textwidth}{7cm}
+    The  attack scenario and the evidence list is shown as follows.\vspace{10pt}
+
+    \scriptsize
+    \extrarowsep = 5pt
+    \begin{tabu}to \textwidth{X[-1, c, m]X[m]X[-1, r, m]X[-1, c, m]}
+    \tabucline[1pt]{-}
+    Step & Description & Time & \text{Evidence}\\
+    \tabucline[1pt]{-}
+    1    & network scanning of the Ethernet in the management layer is launched           & 30   & $a_{ 1} = T$ \\\hline
+    2    & vulnerability scanning of the devices in the management layer is launched      & 40   & $a_{ 2} = T$ \\\hline
+    3    & buffer overflow attack on the web server is launched                           & 74   & $a_{ 3} = T$ \\\hline
+    4    & network scanning of the industrial Ethernet 2 in the control layer is launched & 102  & $a_{13} = T$ \\\hline
+    5    & vulnerability scanning of the devices in the industrial Ethernet 2 is launched & 111  & $a_{14} = T$ \\\hline
+    6    & brute force attack on the data server 2 is launched                            & 140  & $a_{16} = T$ \\\hline
+    7    & DoS attack on PLC5 is launched                                                 & 172  & $a_{27} = T$ \\\hline
+    8    & the traffic control function of V4 is failed                                   & 180  & $f_{14} = T$ \\\hline
+    9    & the level control function of reactor 1 is failed                              & 190  & $f_{13} = T$ \\\tabucline[1pt]{-}
+  \end{tabu}
+  \end{overlayarea} 
 \end{frame}
 
-\begin{frame}{Evidence List}
-    
+
+\begin{frame}{Simulation Result and Analysis}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The curve of the cybersecurity risk is shown in following figure.
+
+  \begin{center}
+    \input{./Figures/CurveOfDynamicCybersecurityRiskWithoutResponse}
+  \end{center}
+  \end{overlayarea} 
 \end{frame}
 
 \begin{frame}{Simulation Result and Analysis}
-    
-\end{frame}
+  \begin{overlayarea}{\textwidth}{7cm}
+    The results of system control are shown as follows.\vspace{10pt}
 
+    \extrarowsep = 1pt
+    \begin{tabu}to \textwidth{X[10]|*4{X[1, c]}}
+    \tabucline[1pt]{-}
+    \multirow{2}{*}{Evidence List} & \multicolumn{4}{c}{Optimal System State}\\\cline{2-5}
+    & $f_1$ & $f_{10}$ & $f_{22}$ & $f_{34}$\\
+    \hline
+    --                                                                              & $1$ & $1$ & $1$ & $1$\\
+    $a_1$                                                                           & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$                                                                    & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$                                                             & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$                                                   & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$, $a_{14}$                                         & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$, $a_{14}$, $a_{16}$                               & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$, $a_{14}$, $a_{16}$, $a_{27}$                     & $1$ & $1$ & $1$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$, $a_{14}$, $a_{16}$, $a_{27}$, $f_{14}$           & $1$ & $0$ & $0$ & $1$\\
+    $a_1$, $a_2$, $a_3$, $a_{13}$, $a_{14}$, $a_{16}$, $a_{27}$, $f_{14}$, $f_{13}$ & $0$ & $0$ & $0$ & $0$\\
+    \tabucline[1pt]{-}
+    \end{tabu}
+  \end{overlayarea} 
+\end{frame}

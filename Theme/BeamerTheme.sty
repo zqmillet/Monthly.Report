@@ -107,22 +107,24 @@
   \multiply\progressbar@tmpdim by \progressbar@tmpcounta
   \divide\progressbar@tmpdim by \progressbar@tmpcountb
 
-  \makebox[\textwidth][l]{
+    \centering
     \begin{tikzpicture}[tight background]
 
-      \node[anchor=south west, inner sep=0pt] at (0pt, 0pt) {
-      \parbox{1.4\progressbar@pbwd}{
-        \begin{flushleft}
+      \node[anchor=south west, inner sep=5pt] (title) at (0pt, 0pt) {
+      \parbox{0.7\paperwidth}{
+        \begin{center}
           \textcolor{white}{\insertsectionHEAD}
-        \end{flushleft}
+        \end{center}
       }};
 
-      \draw[anchor=west, mDarkBrown, fill=mDarkBrown, inner sep=0pt]
-      (2pt, -2pt) rectangle ++ (1.4\progressbar@pbwd, \progressbar@pbht);
+      \draw[mDarkBrown, line width = 1.5pt] (title.south east) -- (title.south west);
+
+      \draw[mDarkBrown, line width = 1.5pt] (title.north east) -- (title.north west);
+
+      % \draw[anchor=west, mDarkBrown, fill=mDarkBrown, inner sep=0pt] (2pt, -2pt) rectangle ++ (1.4\progressbar@pbwd, \progressbar@pbht);
 
       % \draw[anchor=west, mMediumBrown, fill=mMediumBrown, inner sep=0pt] (2pt, -2pt) rectangle ++ (1.4\progressbar@tmpdim, \progressbar@pbht);
     \end{tikzpicture}%
-  }
 }
 
 

@@ -2,10 +2,49 @@
 
 \section{Simulation of Real-Time Capability}
 
-\begin{frame}{Result of Real-Time Simulation}
 
+
+\begin{frame}{Result of Real-Time Simulation}
+  \begin{overlayarea}{\textwidth}{7cm}
+  The evidence list is $(a_1, a_2, a_3, a_8, a_9, a_{10}, a_{25}, f_8)$, the distribution of computing time is shown in the following figure.
+
+  \begin{center}
+    \input{./Figures/DistributionOfComputingTime}
+  \end{center}    
+  \end{overlayarea}
 \end{frame}
 
 \begin{frame}{Result of Scalability Simulation}
+  \begin{overlayarea}{\textwidth}{7cm}
+  A variety of evidence lists are input into the decision-making system. For each evidence list, the decision-making process is repeated 200 times.
 
+  \only<+>{The computing time of all decision-making processes is recorded, and the key parameters are shown as follows.\vspace{10pt}
+
+  \resizebox{\textwidth}{!}{\tabulinesep = 5pt
+  \begin{tabu}to 1.4\textwidth{X[3]|X[c, 2]*3{|X[c]}}
+  \tabucline[1pt]{-}
+    \multirow{2}{*}{Evidence List}  & \multirow{2}{*}{
+                                        \parbox{3cm}{\begin{center}
+                                          Strategy Profile Number
+                                        \end{center}                                          
+                                        }
+                                      } & \multicolumn{3}{c}{Computing Time (s)}\\\cline{3-5}
+                                    &                                   & Minimum  & Average    & Maximum \\
+  \hline
+    $a_1$                                                               & \SSN{1}  & \SSA{1}{6} & \SSA{1}{4} & \SSA{1}{5}\\
+    $f_8$, $f_7$                                                        & \SSN{2}  & \SSA{2}{6} & \SSA{2}{4} & \SSA{2}{5}\\
+    $a_1$, $a_2$                                                        & \SSN{3}  & \SSA{3}{6} & \SSA{3}{4} & \SSA{3}{5}\\
+    $a_1$, $a_2$, $a_3$                                                 & \SSN{4}  & \SSA{4}{6} & \SSA{4}{4} & \SSA{4}{5}\\
+    $a_1$, $a_2$, $a_3$, $a_8$, $a_9$, $a_{10}$, $a_{25}$               & \SSN{5}  & \SSA{5}{6} & \SSA{5}{4} & \SSA{5}{5}\\
+    $a_1$, $a_2$, $a_3$, $a_8$, $a_9$, $a_{10}$                         & \SSN{6}  & \SSA{6}{6} & \SSA{6}{4} & \SSA{6}{5}\\
+    $a_1$, $a_2$, $a_3$, $a_8$, $a_9$, $a_{10}$, $a_{25}$, $f_8$        & \SSN{7}  & \SSA{7}{6} & \SSA{7}{4} & \SSA{7}{5}\\
+    $a_1$, $a_2$, $a_3$, $a_8$, $a_9$, $a_{10}$, $a_{25}$, $f_8$, $f_7$ & \SSN{8}  & \SSA{8}{6} & \SSA{8}{4} & \SSA{8}{5}\\
+  \tabucline[1pt]{-}
+  \end{tabu}
+  }}
+  \only<+>{The relationship between strategy profile number and computing time is shown in the following figure.\vspace{10pt}
+
+    \input{./Figures/RelationshipBetweenStrategyProfileNumberAndComputingTime}
+  }
+  \end{overlayarea}
 \end{frame}
