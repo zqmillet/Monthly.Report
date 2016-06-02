@@ -7,6 +7,7 @@
 % \usepackage{silence}
 % \WarningFilter{latex}{You have requested package}
 
+\usepackage{qrcode}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
@@ -30,6 +31,7 @@
 \usetkzobj{all}
 \usepackage[framed,numbered]{matlab-prettifier}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
 \usepgfplotslibrary{groupplots}
 \usepgfplotslibrary{fillbetween}
 
@@ -45,21 +47,6 @@
 
 \usepackage{soul}
 \usepackage{keycommand}
-
-\usepackage{readarray}
-\readdef{./Simulation/OutputData/ForLaTeX/MaximumComputingTime}{\MaximumComputingTime}
-\readdef{./Simulation/OutputData/ForLaTeX/MinimumComputingTime}{\MinimumComputingTime}
-\readdef{./Simulation/OutputData/ForLaTeX/AverageComputingTime}{\AverageComputingTime}
-\readdef{./Simulation/OutputData/ForLaTeX/MuOfComputingTime}{\MuOfComputingTime}
-\readdef{./Simulation/OutputData/ForLaTeX/SigmaOfComputingTime}{\SigmaOfComputingTime}
-\readdef{./Simulation/OutputData/ScalabilityStatistics.dat}{\ScalabilityStatistics}
-\readdef{./Simulation/OutputData/ForLaTeX/LineFittingA}{\LineFittingA}
-\readdef{./Simulation/OutputData/ForLaTeX/LineFittingB}{\LineFittingB}
-\readdef{./Simulation/OutputData/ForLaTeX/LineFittingR}{\LineFittingR}
-\readdef{./Simulation/OutputData/ForLaTeX/LineFittingDomain}{\LineFittingDomain}
-\readArrayij{\ScalabilityStatistics}{ScalabilityStatisticsArray}{6}
-\newcommand{\SSA}[2]{$\Arrayij{ScalabilityStatisticsArray}{#1}{#2}$}
-\newcommand{\SSN}[1]{$\Arrayij{ScalabilityStatisticsArray}{#1}{1} \times \Arrayij{ScalabilityStatisticsArray}{#1}{2} = \Arrayij{ScalabilityStatisticsArray}{#1}{3}$}
 
 \DeclareMathSizes{5}{5}{3}{3}
 
